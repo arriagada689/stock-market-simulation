@@ -16,12 +16,26 @@ export function GlobalProvider({ children }) {
         }
     }, [])
 
+    const authUser = (data) => {
+        localStorage.setItem('userInfo', JSON.stringify(data))
+        setIsLoggedIn(true);
+        setUserData(data);
+    }
+
+    const logoutUser = () => {
+        localStorage.removeItem('userInfo');
+        setIsLoggedIn(false);
+        setUserData({});
+    };
+
     return (
         <GlobalContext.Provider value={{
             isLoggedIn,
             setIsLoggedIn,
             userData,
-            setUserData
+            setUserData,
+            authUser,
+            logoutUser
         }}>
             {children}
         </GlobalContext.Provider>

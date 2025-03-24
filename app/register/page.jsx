@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 const initialState = {
     username: '',
+    buying_power: '',
     password: '',
     confirm_password: ''
 }
@@ -28,6 +29,9 @@ const RegisterPage = () => {
             <form action={formAction}>
                 <label htmlFor="username">username:</label>
                 <input type="text" name="username" className="border"/>
+
+                <label htmlFor="buying_power">Buying Power:</label>
+                <input type="text" name="buying_power" className="border"/>
 
                 <label htmlFor="password">password:</label>
                 <input type="text" name="password" className="border"/>

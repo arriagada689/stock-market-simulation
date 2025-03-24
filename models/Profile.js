@@ -10,6 +10,10 @@ const ProfileSchema = new Schema({
     description: {
         type: String,
         default: ''
+    },
+    buying_power: {
+        type: Number,
+        required: true
     }
 })
 

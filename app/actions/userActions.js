@@ -11,6 +11,7 @@ async function createUser(prevState, formData) {
     await connectDB()
 
     const username = formData.get('username')
+    const buyingPower = formData.get('buying_power')
     const password = formData.get('password')
     const confirm_password = formData.get('confirm_password')
 
@@ -34,7 +35,8 @@ async function createUser(prevState, formData) {
         //create profile
         await Profile.create({
             user: user._id,
-            description: `${user.username}'s profile`
+            description: `${user.username}'s profile`,
+            buying_power: Number(buyingPower)
         })
         const token = generateToken(user._id)
 

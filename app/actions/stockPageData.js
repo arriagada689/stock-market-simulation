@@ -8,6 +8,11 @@ async function stockPageData(symbol) {
         const response = await fetch(url)
         if(response.ok){
             const data = await response.json()
+
+            //get the user's buying power
+            const session = await auth()
+            console.log(session);
+
             return data
         } else {
             const error = await response.json()

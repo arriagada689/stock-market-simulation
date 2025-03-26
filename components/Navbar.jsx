@@ -1,14 +1,16 @@
 'use client'
 import Link from "next/link";
 import { redirect } from "next/navigation"
-import { useGlobalContext } from "@/context/GlobalContext";
 import SearchBar from "./SearchBar";
+import { ModeToggle } from "./ModeToggle";
+
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
-    const { isLoggedIn, logoutUser } = useGlobalContext()
+    const { data: session } = useSession();
     
     const handleLogOut = () => {
-        logoutUser()
+        signOut()
         redirect('/')
     }
 
@@ -22,7 +24,9 @@ const Navbar = () => {
 
             <SearchBar />
 
-            {isLoggedIn && 
+            <ModeToggle />
+
+            {session && 
                 <div className="space-x-3">
                     <Link href={'/profile'}>Profile</Link>
                     <button onClick={handleLogOut}>Log Out</button>

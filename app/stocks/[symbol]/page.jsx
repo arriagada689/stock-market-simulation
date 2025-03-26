@@ -14,9 +14,9 @@ const sampleData = {
 
 const StockPage = async ({ params }) => {
     const { symbol } = await params
-
-    // const data = await stockPageData(symbol)
-    const data = sampleData
+    
+    const data = await stockPageData(symbol)
+    // const data = sampleData
     
     return ( 
         <div>

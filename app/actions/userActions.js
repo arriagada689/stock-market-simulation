@@ -3,17 +3,11 @@ import connectDB from "@/config/db"
 import User from "@/models/User"
 import Profile from "@/models/Profile"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { validateCreateUserInput } from "@/utils/inputValidation"
 import generateToken from "@/utils/generateToken"
 
-async function createUser(prevState, formData) {
+async function createUser(username, buyingPower, password, confirm_password) {
     await connectDB()
-
-    const username = formData.get('username')
-    const buyingPower = formData.get('buying_power')
-    const password = formData.get('password')
-    const confirm_password = formData.get('confirm_password')
 
     const inputValidation = validateCreateUserInput(username, password, confirm_password)
     if(!inputValidation.isValid){
@@ -38,16 +32,11 @@ async function createUser(prevState, formData) {
             description: `${user.username}'s profile`,
             buying_power: Number(buyingPower)
         })
-        const token = generateToken(user._id)
 
         revalidatePath('/', 'layout')
         
         return { 
-            user: {
-                _id: user._id.toString(),
-                username: user.username,
-                token
-            }
+            success: "User registered successfully"
          }
     } else {
         return { error: 'Invalid user data' }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const BackendBox = ({ currentPrice }) => {
+const BackendBox = ({ currentPrice, buyingPower }) => {
     const [amount, setAmount] = useState('')
     const [estimatedQuantity, setEstimatedQuantity] = useState('')
 
@@ -30,6 +30,8 @@ const BackendBox = ({ currentPrice }) => {
             <div>Backend Box</div>
             <input type="text" value={amount} onChange={handleChange} placeholder="$0.00" className="border"/>
             {estimatedQuantity && <div>{estimatedQuantity}</div>}
+
+            {buyingPower && <div>Buying Power:{ buyingPower }</div>}
 
             <button onClick={handleConfirmClick}>Confirm</button>
         </div>
